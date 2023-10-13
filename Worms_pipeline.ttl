@@ -1,0 +1,69 @@
+@prefix js: <https://w3id.org/conn/js#> .
+@prefix ws: <https://w3id.org/conn/ws#> .
+@prefix : <https://w3id.org/conn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rml: <https://w3id.org/conn/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+
+<> owl:imports <https://raw.githubusercontent.com/TREEcg/connector-architecture/main/channel/file.ttl>.
+<> owl:imports <./processor/sds-processors/configs/yarrrml.ttl>.
+<> owl:imports <./processor/sds-processors/configs/sdsify.ttl>.
+<> owl:imports <./processor/sds-storage-writer-mongo/step.ttl>.
+<> owl:imports <./processor/rml-mapper-processor-ts/rmlMapper.ttl>.
+
+
+[] a js:JsChannel;
+  :reader <ld/reader-js>;
+  :writer <ld/writer-js>.
+
+<ld/reader-js> a :JsReaderChannel.
+<ld/writer-js> a :JsWriterChannel.
+
+[] a js:JsChannel;
+  :reader <mapping/reader-js>;
+  :writer <mapping/writer-js>.
+
+<mapping/reader-js> a :JsReaderChannel.
+<mapping/writer-js> a :JsWriterChannel.
+
+[] a js:JsChannel;
+  :reader <sds/reader-js>;
+  :writer <sds/writer-js>.
+
+<sds/reader-js> a :JsReaderChannel.
+<sds/writer-js> a :JsWriterChannel.
+
+
+<metadata/reader> a :FileReaderChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace "true";
+  :filePath <./metadataIn.ttl>.
+
+<yarrmls/file> a :FileReaderChannel;
+  :fileReadFirstContent "true";
+  :fileOnReplace "true";
+  :filePath <./rules.yml>.
+
+[] a js:Y2R;
+  js:input <yarrmls/file>;
+  js:output <mapping/writer-js>.
+
+[] a js:RmlMapperReader;
+  js:rml_mapping_reader <mapping/reader-js>;
+  js:rml_data_output <ld/writer-js>;
+  rml:jarFile <./rmlmapper-6.2.1-r0-all.jar>.
+
+ [] a js:Sdsify;
+  js:input <ld/reader-js>;
+  js:output <sds/writer-js>;
+  js:stream <https://w3id.org/sds#Stream>.
+
+[] a js:Ingest;
+  js:dataInput <sds/reader-js>;
+  js:metadataInput <metadata/reader>;
+  js:metadataCollection "VIDYA_META";
+  js:dataCollection "VIDYA_DATA";
+  js:indexCollection "VIDYA_INDEX";
+  js:databaseUrl "mongodb://127.0.0.1:27017/ldes";
+  js:pageSize 150.

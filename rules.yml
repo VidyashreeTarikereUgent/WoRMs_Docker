@@ -1,0 +1,334 @@
+prefixes:
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  owl: http://www.w3.org/2002/07/owl#
+  dwc: http://rs.tdwg.org/dwc/terms/
+  dcterms: http://purl.org/dc/terms/
+  gbif: http://rs.gbif.org/terms/1.0/
+  species: http://example-species.com/
+  taxon: http://example-taxon.com/
+  idlab-fn: http://example.com/idlab/function/
+  marine: http://marineRegions.org/
+  grel: http://users.ugent.be/~bjdmeest/function/grel.ttl#
+  ex:	http://example.com/idlab/function/
+
+targets:
+  t1:
+    access: /home/idlab149/Documents/maregraph/WoRMs_Docker/output_triples.ttl
+    type: void
+    serialization: turtle
+    
+mappings:
+  taxonMapping:
+        sources: 
+          - access: /home/idlab149/Documents/maregraph/WoRMs_Docker/joinedSample.tsv
+            referenceFormulation: csv
+            delimiter: "\t"
+        subjects:
+           - value: marine:$(taxonID)
+            targets: t1
+            #  ldes:
+            #   watchedProperties: [$(taxonID),$(scientificNameID),$(acceptedNameUsageID), $(parentNameUsageID), $(namePublishedInID), $(scientificName), $(acceptedNameUsage), $(parentNameUsageID), $(namePublishedIn), $(namePublishedInYear), $(class), $(order), $(family), $(genus), $(subgenus), $(specificEpithet), $(infraspecificEpithet), $(taxonRank), $(scientificNameAuthorship), $(nomenclaturalCode), $(taxonomicStatus), $(nomenclaturalStatus), $(modified), $(bibliographicCitation), $(references), $(license), $(rightsHolder), $(datasetName), $(institutionCode), $(datasetID), $(vernacularName), $(source), $(isPreferredName), $(isMarine), $(isFreshwater), $(isTerrestrial), $(isExtinct), $(license), $(language), $(family)]
+            #   versionOfPath: []   
+            #   timestampPath: [marine:dcterms#modified,$(modified), xsd:dateTime]
+                                              
+        po:
+
+          - p: marine:dwc#scientificNameID
+            o: $(scientificNameID)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(scientificNameID)]
+              - [grel:valueParameter2, ""]
+          
+          - p: marine:dwc#acceptedNameUsageID
+            o: $(acceptedNameUsageID)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(acceptedNameUsageID)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#parentNameUsageID
+            o: $(parentNameUsageID)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(parentNameUsageID)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#namePublishedInID
+            o: $(namePublishedInID)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(namePublishedInID)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#scientificName
+            o: $(scientificName)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(scientificName)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#acceptedNameUsage
+            o: $(acceptedNameUsage)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(acceptedNameUsage)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#parentNameUsage
+            o: $(parentNameUsage)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(parentNameUsage)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#namePublishedIn
+            o: $(namePublishedIn)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(namePublishedIn)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#namePublishedInYear
+            o: $(namePublishedInYear)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(namePublishedInYear)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#class
+            o: $(class)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(class)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#order
+            o: $(order)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(order)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#genus
+            o: $(genus)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(genus)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#subgenus
+            o: $(subgenus)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(subgenus)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#specificEpithet
+            o: $(specificEpithet)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(specificEpithet)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#infraspecificEpithet
+            o: $(infraspecificEpithet)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(infraspecificEpithet)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#taxonRank
+            o: $(taxonRank)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(taxonRank)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#scientificNameAuthorship
+            o: $(scientificNameAuthorship)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(scientificNameAuthorship)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#nomenclaturalCode
+            o: $(nomenclaturalCode)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(nomenclaturalCode)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#taxonomicStatus
+            o: $(taxonomicStatus)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(taxonomicStatus)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#nomenclaturalStatus
+            o: $(nomenclaturalStatus)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(nomenclaturalStatus)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#modified
+            o: $(modified)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(modified)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#bibliographicCitation
+            o: $(bibliographicCitation)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(bibliographicCitation)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#references
+            o: $(references)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(references)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#rightsHolder
+            o: $(rightsHolder)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(rightsHolder)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#datasetName
+            o: $(datasetName)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(datasetName)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#institutionCode
+            o: $(institutionCode)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(institutionCode)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#datasetID
+            o: $(datasetID)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(datasetID)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#vernacularName
+            o: $(vernacularName)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(vernacularName)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#source
+            o: $(source)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(source)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:gbif#isPreferredName
+            o: $(isPreferredName)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(isPreferredName)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:gbif#isMarine
+            o: $(isMarine)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(isMarine)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:gbif#isFreshwater
+            o: $(isFreshwater)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(isFreshwater)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:gbif#isTerrestrial
+            o: $(isTerrestrial)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(isTerrestrial)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:gbif#isExtinct
+            o: $(isExtinct)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(isExtinct)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#license
+            o: $(license)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(license)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dcterms#language
+            o: $(language)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(language)]
+              - [grel:valueParameter2, ""]
+
+          - p: marine:dwc#family
+            o: $(family)
+            condition: 
+              function: idlab-fn:notEqual
+              parameters:
+              - [grel:valueParameter, $(family)]
+              - [grel:valueParameter2, ""]
+
+  
